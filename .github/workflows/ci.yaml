@@ -1,0 +1,23 @@
+name: CI AND IT
+
+on:
+  pull_request:
+
+jobs:
+  ci:
+    name: Build And Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16.x
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create kind cluster
+        uses: container-tools/kind-action@v1
+      - name: Build ofn
+        run: make build
+      - name: Install All
+        run: ./dist/ofn_linux_amd64 install --all
