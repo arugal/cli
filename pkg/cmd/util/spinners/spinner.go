@@ -49,7 +49,8 @@ func (s *Spinner) handleMessage(message string) string {
 
 // Update updates the spinner message
 func (s *Spinner) Update(message string) {
-	s.message.SetValue(s.handleMessage(message))
+	//s.message.SetValue(s.handleMessage(message))
+	fmt.Println(s.handleMessage(message))
 }
 
 // Done marks spinner as success

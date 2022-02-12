@@ -6,7 +6,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ahmetalpbalkan/go-cursor"
 	"github.com/leaanthony/synx"
 )
 
@@ -100,20 +99,21 @@ func (g *SpinnerGroup) Wait() error {
 }
 
 func (g *SpinnerGroup) redraw() {
-	g.Lock()
-	defer g.Unlock()
-	if !g.running {
-		return
-	}
-	if g.drawn {
-		fmt.Print(cursor.MoveUp(len(g.spinners)))
-	}
-	for _, spinner := range g.spinners {
-		fmt.Print(cursor.ClearEntireLine())
-		fmt.Println(spinner.refresh())
-	}
-	g.currentFrameIdx = (g.currentFrameIdx + 1) % len(g.frames)
-	g.drawn = true
+	return
+	//g.Lock()
+	//defer g.Unlock()
+	//if !g.running {
+	//	return
+	//}
+	//if g.drawn {
+	//	fmt.Print(cursor.MoveUp(len(g.spinners)))
+	//}
+	//for _, spinner := range g.spinners {
+	//	fmt.Print(cursor.ClearEntireLine())
+	//	fmt.Println(spinner.refresh())
+	//}
+	//g.currentFrameIdx = (g.currentFrameIdx + 1) % len(g.frames)
+	//g.drawn = true
 }
 
 func (g *SpinnerGroup) checkIfNeedToTerminate() {

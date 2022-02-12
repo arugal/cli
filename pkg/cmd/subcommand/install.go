@@ -266,10 +266,8 @@ func (i *Install) RunInstall(cl *k8s.Clientset, cmd *cobra.Command) error {
 		if !inventoryExist[inventory.DaprName] || i.Upgrade {
 			count += 1
 			grp1.AddSpinner()
-			go func(ctx context.Context, idx int) {
-				spinner := grp1.At(idx).WithName("Dapr")
-				installDapr(ctx, spinner, operator)
-			}(ctx, count-1)
+			spinner := grp1.At(count - 1).WithName("Dapr")
+			installDapr(ctx, spinner, operator)
 		}
 	}
 
@@ -278,10 +276,8 @@ func (i *Install) RunInstall(cl *k8s.Clientset, cmd *cobra.Command) error {
 		if !inventoryExist[inventory.KedaName] || i.Upgrade {
 			count += 1
 			grp1.AddSpinner()
-			go func(ctx context.Context, idx int) {
-				spinner := grp1.At(idx).WithName("Keda")
-				installKeda(ctx, spinner, cl, operator)
-			}(ctx, count-1)
+			spinner := grp1.At(count - 1).WithName("Keda")
+			installKeda(ctx, spinner, cl, operator)
 		}
 	}
 
@@ -290,20 +286,16 @@ func (i *Install) RunInstall(cl *k8s.Clientset, cmd *cobra.Command) error {
 		if !inventoryExist[inventory.KnativeServingName] || i.Upgrade {
 			count += 1
 			grp1.AddSpinner()
-			go func(ctx context.Context, idx int) {
-				spinner := grp1.At(idx).WithName("Knative Serving")
-				installKnativeServing(ctx, spinner, cl, operator)
-			}(ctx, count-1)
+			spinner := grp1.At(count - 1).WithName("Knative Serving")
+			installKnativeServing(ctx, spinner, cl, operator)
 		}
 	}
 
 	if i.WithShipWright {
 		count += 1
 		grp1.AddSpinner()
-		go func(ctx context.Context, idx int) {
-			spinner := grp1.At(idx).WithName("Shipwright")
-			installShipwright(ctx, spinner, cl, operator)
-		}(ctx, count-1)
+		spinner := grp1.At(count - 1).WithName("Shipwright")
+		installShipwright(ctx, spinner, cl, operator)
 	}
 
 	if i.WithCertManager {
@@ -311,10 +303,8 @@ func (i *Install) RunInstall(cl *k8s.Clientset, cmd *cobra.Command) error {
 		if !inventoryExist[inventory.CertManagerName] || i.Upgrade {
 			count += 1
 			grp1.AddSpinner()
-			go func(ctx context.Context, idx int) {
-				spinner := grp1.At(idx).WithName("Cert Manager")
-				installCertManager(ctx, spinner, cl, operator)
-			}(ctx, count-1)
+			spinner := grp1.At(count - 1).WithName("Cert Manager")
+			installCertManager(ctx, spinner, cl, operator)
 		}
 	}
 
@@ -323,10 +313,8 @@ func (i *Install) RunInstall(cl *k8s.Clientset, cmd *cobra.Command) error {
 		if !inventoryExist[inventory.IngressName] || i.Upgrade {
 			count += 1
 			grp1.AddSpinner()
-			go func(ctx context.Context, idx int) {
-				spinner := grp1.At(idx).WithName("Ingress")
-				installIngress(ctx, spinner, cl, operator)
-			}(ctx, count-1)
+			spinner := grp1.At(count - 1).WithName("Ingress")
+			installIngress(ctx, spinner, cl, operator)
 		}
 	}
 
